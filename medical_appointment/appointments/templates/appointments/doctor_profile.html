@@ -1,0 +1,18 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+<section class="doctor-profile">
+    <div class="doctor-info">
+        {% if doctor.photo %}
+            <img src="{{ doctor.photo.url }}" alt="{{ doctor.name }}">
+        {% endif %}
+        <h2>{{ doctor.name }}</h2>
+        <p class="specialization">{{ doctor.specialization }}</p>
+        <div class="schedule">
+            <h3>Schedule</h3>
+            {{ doctor.schedule|linebreaks }}
+        </div>
+        <a href="{% url 'book_appointment' doctor.id %}" class="btn">Book Appointment</a>
+    </div>
+</section>
+{% endblock %}

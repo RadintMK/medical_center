@@ -1,0 +1,34 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+<section class="doctors-section">
+    <div class="container">
+        <h2>Available Doctors</h2>
+        
+        {% if doctors %}
+            <div class="doctors-grid">
+                {% for doctor in doctors %}
+                    <div class="doctor-card">
+                        {% if doctor.photo %}
+                            <img src="{{ doctor.photo.url }}" alt="{{ doctor.name }}" class="doctor-card__image">
+                        {% endif %}
+                        <div class="doctor-card__content">
+                            <h3 class="doctor-card__name">{{ doctor.name }}</h3>
+                            <p class="doctor-card__specialization">{{ doctor.specialization }}</p>
+                            <div class="doctor-card__schedule">
+                                {{ doctor.schedule|linebreaks }}
+                            </div>
+                            <a href="{% url 'doctor_profile' doctor.id %}" class="button button--primary">View Profile</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <p>No doctors found matching your criteria.</p>
+                <a href="{% url 'symptoms' %}" class="button button--outline">Back to Symptoms</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

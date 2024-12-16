@@ -1,0 +1,19 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+<section class="symptoms-section">
+    <h2>Select Your Symptoms</h2>
+    <form method="post" class="symptoms-form">
+        {% csrf_token %}
+        <div class="symptoms-grid">
+            {% for symptom in symptoms %}
+                <div class="symptom-checkbox">
+                    <input type="checkbox" name="symptoms" value="{{ symptom.id }}" id="symptom_{{ symptom.id }}">
+                    <label for="symptom_{{ symptom.id }}">{{ symptom.name }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn">Find Doctors</button>
+    </form>
+</section>
+{% endblock %}

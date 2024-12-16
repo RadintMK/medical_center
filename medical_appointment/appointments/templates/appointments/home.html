@@ -1,0 +1,25 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <h1>Find Your Doctor</h1>
+    <div class="search-box">
+        <form action="{% url 'symptoms' %}" method="get">
+            <input type="text" name="search" placeholder="Search symptoms...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</section>
+
+<section class="quick-symptoms">
+    <h2>Common Symptoms</h2>
+    <div class="symptoms-grid">
+        {% for symptom in symptoms %}
+            <div class="symptom-card">
+                <h3>{{ symptom.name }}</h3>
+                <a href="{% url 'symptoms' %}?symptom={{ symptom.id }}" class="btn">Find Doctor</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
